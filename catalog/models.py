@@ -61,11 +61,9 @@ class Order(models.Model):
         validators=[MinValueValidator(0)],
     )
     created_at = models.DateTimeField(auto_now_add=True)
-    dish = models.ForeignKey(
+    dishes = models.ManyToManyField(
         Dish,
-        on_delete=models.SET_NULL,
         related_name="orders",
-        null=True,
         blank=True,
     )
     order_taker = models.ForeignKey(
@@ -80,4 +78,4 @@ class Order(models.Model):
         ordering = ("-created_at",)
 
     def __str__(self):
-        return f"{self.customer_name} (${self.table_number})"
+        return f"{self.customer_name} ({self.table_number})"
