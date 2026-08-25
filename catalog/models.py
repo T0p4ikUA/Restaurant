@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator
 from django.db import models
 
 class Position(models.Model):
@@ -12,8 +14,6 @@ class Position(models.Model):
 
 
 class Employee(AbstractUser):
-    username = models.CharField(max_length=255)
-    is_active = models.BooleanField(default=True)
     position = models.ForeignKey(
         Position,
         on_delete=models.CASCADE,
@@ -26,17 +26,19 @@ class Employee(AbstractUser):
         ordering = ("username",)
 
     def __str__(self):
-        return (f"{self.username}, "
-                f"(is_active: {self.is_active},"
-                f"position: {self.position})")
+        return f"{self.username} (position: {self.position})"
 
 
 class Dish(models.Model):
     dish_name = models.CharField(max_length=255)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    price = models.DecimalField(
+        max_digits=6,
+        decimal_places=2,
+        validators=[MinValueValidator(0)],
+    )
     description = models.TextField(null=True, blank=True)
     cooked_by = models.ForeignKey(
-        Employee,
+        settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         related_name="dishes",
         null=True,
@@ -53,7 +55,11 @@ class Dish(models.Model):
 class Order(models.Model):
     customer_name = models.CharField(max_length=255)
     table_number = models.CharField(max_length=50)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    price = models.DecimalField(
+        max_digits=6,
+        decimal_places=2,
+        validators=[MinValueValidator(0)],
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     dish = models.ForeignKey(
         Dish,
@@ -63,7 +69,7 @@ class Order(models.Model):
         blank=True,
     )
     order_taker = models.ForeignKey(
-        Employee,
+        settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         related_name="orders",
         null=True,
