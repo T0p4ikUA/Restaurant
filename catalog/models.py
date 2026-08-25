@@ -48,3 +48,30 @@ class Dish(models.Model):
 
     def __str__(self):
         return f"{self.dish_name} (${self.price})"
+
+
+class Order(models.Model):
+    customer_name = models.CharField(max_length=255)
+    table_number = models.CharField(max_length=50)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
+    dish = models.ForeignKey(
+        Dish,
+        on_delete=models.SET_NULL,
+        related_name="orders",
+        null=True,
+        blank=True,
+    )
+    order_taker = models.ForeignKey(
+        Employee,
+        on_delete=models.SET_NULL,
+        related_name="orders",
+        null=True,
+        blank=True,
+    )
+
+    class Meta:
+        ordering = ("-created_at",)
+
+    def __str__(self):
+        return f"{self.customer_name} (${self.table_number})"
