@@ -29,3 +29,22 @@ class Employee(AbstractUser):
         return (f"{self.username}, "
                 f"(is_active: {self.is_active},"
                 f"position: {self.position})")
+
+
+class Dish(models.Model):
+    dish_name = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    description = models.TextField(null=True, blank=True)
+    cooked_by = models.ForeignKey(
+        Employee,
+        on_delete=models.SET_NULL,
+        related_name="dishes",
+        null=True,
+        blank=True,
+    )
+
+    class Meta:
+        ordering = ("dish_name",)
+
+    def __str__(self):
+        return f"{self.dish_name} (${self.price})"
