@@ -1,9 +1,15 @@
 {% extends "base.html" %}
 {% block title %}
-<title>Restaurant Home</title>
+  <title>Restaurant Home</title>
 {% endblock %}
 {% block content %}
-<h1>Restaurant</h1>
-<p>Welcome to Restaurant "Bezdohannyyi"</p>
-<h3>Restaurant Content:</h3>
+  <h1>Restaurant</h1>
+  <p>Welcome to Restaurant "Bezdohannyyi"</p>
+  <h3>Restaurant Content:</h3>
+  <ul>
+    <li>The number of positions in restaurant: {{ num_pos }}</li>
+    <li>The number of employees in restaurant: {{ num_emp }}</li>
+    <li>The number of dishes in restaurant: {{ num_dis }}</li>
+    <li>The number of orders in restaurant: {{ num_ord }}</li>
+  </ul>
 {% endblock %}
