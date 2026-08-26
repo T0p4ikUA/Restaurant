@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Position List<a class="btn btn-primary" style="float:right" href="">+</a></h1>
+  {% if positions_list %}
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th>Position ID</th>
+          <th>Name</th>
+        </tr>
+        {% for position in positions_list %}
+          <tr>
+            <td>{{ position.id }}</td>
+            <td>{{ position.name }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  {% else %}
+    <p>There are no positions in restaurant.</p>
+  {% endif %}
+{% endblock %}

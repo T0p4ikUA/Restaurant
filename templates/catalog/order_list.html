@@ -3,34 +3,36 @@
 {% block content %}
   <h1>Order List<a class="btn btn-primary" style="float:right" href="">+</a></h1>
   {% if orders_list %}
-    <table class="table">
-      <tr>
-        <th>Order ID</th>
-        <th>Dish ID</th>
-        <th>Order taker</th>
-        <th>Customer name</th>
-        <th>Table number</th>
-        <th>Price</th>
-        <th>Created at</th>
-      </tr>
-      {% for order in orders_list %}
+    <div class="table-responsive">
+      <table class="table">
         <tr>
-          <td>{{ order.id }}</td>
-          <td>
-            {% for dish in order.dishes.all %}
-              {{ dish.id }}{% if not forloop.last %}, {% endif %}
-            {% empty %}
-              -
-            {% endfor %}
-          </td>
-          <td>{{ order.order_taker.username|default:"-" }}</td>
-          <td>{{ order.customer_name }}</td>
-          <td>{{ order.table_number }}</td>
-          <td>{{ order.price }}</td>
-          <td>{{ order.created_at }}</td>
+          <th>Order ID</th>
+          <th>Dish ID</th>
+          <th>Order taker</th>
+          <th>Customer name</th>
+          <th>Table number</th>
+          <th>Price</th>
+          <th>Created at</th>
         </tr>
-      {% endfor %}
-    </table>
+        {% for order in orders_list %}
+          <tr>
+            <td>{{ order.id }}</td>
+            <td>
+              {% for dish in order.dishes.all %}
+                {{ dish.id }}{% if not forloop.last %}, {% endif %}
+              {% empty %}
+                -
+              {% endfor %}
+            </td>
+            <td>{{ order.order_taker.username|default:"-" }}</td>
+            <td>{{ order.customer_name }}</td>
+            <td>{{ order.table_number }}</td>
+            <td>{{ order.price }}</td>
+            <td>{{ order.created_at }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
   {% else %}
     <p>There are no orders in restaurant.</p>
   {% endif %}

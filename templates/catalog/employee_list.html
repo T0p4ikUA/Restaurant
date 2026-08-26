@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Employee List<a class="btn btn-primary" style="float:right" href="">+</a></h1>
+  {% if employees_list %}
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Position ID</th>
+          <th>Username</th>
+          <th>Is Active</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for employee in employees_list %}
+          <tr>
+            <td>{{ employee.id }}</td>
+            <td>{{ employee.position.id }}</td>
+            <td>{{ employee.username }}</td>
+            <td>{{ employee.is_active }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p>There are no employees in restaurant.</p>
+  {% endif %}
+{% endblock %}
