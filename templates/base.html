@@ -22,6 +22,11 @@
     <div class="col-sm-9">
       {% block content %}
       {% endblock %}
+      {% block pagination %}
+        {% if is_paginated %}
+          {% include "includes/pagination.html" %}
+        {% endif %}
+      {% endblock %}
     </div>
   </div>
 </div>

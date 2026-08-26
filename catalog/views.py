@@ -35,6 +35,7 @@ class EmployeeListView(LoginRequiredMixin, generic.ListView):
     template_name = "catalog/employee_list.html"
     context_object_name = "employees_list"
     queryset = Employee.objects.select_related("position")
+    paginate_by = 3
 
 
 class DishListView(LoginRequiredMixin, generic.ListView):
@@ -42,6 +43,7 @@ class DishListView(LoginRequiredMixin, generic.ListView):
     template_name = "catalog/dish_list.html"
     context_object_name = "dishes_list"
     queryset = Dish.objects.select_related("cooked_by")
+    paginate_by = 3
 
 
 class OrderListView(LoginRequiredMixin, generic.ListView):
@@ -49,3 +51,4 @@ class OrderListView(LoginRequiredMixin, generic.ListView):
     template_name = "catalog/order_list.html"
     context_object_name = "orders_list"
     queryset = Order.objects.prefetch_related("order_taker")
+    paginate_by = 3
