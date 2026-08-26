@@ -1,5 +1,7 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
+from django.views import generic
 
 from catalog.models import Position, Employee, Dish, Order
 
@@ -19,3 +21,31 @@ def index(request: HttpRequest) -> HttpResponse:
         "num_visits": num_visits,
     }
     return render(request, "catalog/index.html", context)
+
+
+class PositionListView(LoginRequiredMixin, generic.ListView):
+    model = Position
+    template_name = "catalog/position_list.html"
+    context_object_name = "positions_list"
+    queryset = Position.objects.all()
+
+
+class EmployeeListView(LoginRequiredMixin, generic.ListView):
+    model = Employee
+    template_name = "catalog/employee_list.html"
+    context_object_name = "employees_list"
+    queryset = Employee.objects.select_related("position")
+
+
+class DishListView(LoginRequiredMixin, generic.ListView):
+    model = Dish
+    template_name = "catalog/dish_list.html"
+    context_object_name = "dishes_list"
+    queryset = Dish.objects.select_related("cooked_by")
+
+
+class OrderListView(LoginRequiredMixin, generic.ListView):
+    model = Order
+    template_name = "catalog/order_list.html"
+    context_object_name = "orders_list"
+    queryset = Order.objects.prefetch_related("order_taker")
