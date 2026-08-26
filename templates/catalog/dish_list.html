@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Dish List<a class="btn btn-primary" style="float:right" href="">+</a></h1>
+  {% if dishes_list %}
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Dish ID</th>
+          <th>Dish Name</th>
+          <th>Price</th>
+          <th>Cooked By</th>
+          <th>description</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for dish in dishes_list %}
+          <tr>
+            <td>{{ dish.id }}</td>
+            <td>{{ dish.dish_name }}</td>
+            <td>{{ dish.price }}</td>
+            <td>{{ dish.cooked_by.username|default:"—" }}</td>
+            <td>
+              {% if dish.description %}
+                <details>
+                  <summary style="cursor: pointer; color: #0d6efd;">
+                    {{ dish.description|truncatewords:5 }}
+                  </summary>
+                  <div class="mt-2 text-muted">
+                    {{ dish.description }}
+                  </div>
+                </details>
+              {% else %}
+                —
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p>There are no dishes in restaurant.</p>
+  {% endif %}
+{% endblock %}
