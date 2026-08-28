@@ -1,27 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Employee List<a class="btn btn-primary" style="float:right" href="">+</a></h1>
+  <h1>Employee List <a class="btn btn-primary" style="float:right" href="{% url 'catalog:employee-form' %}">+</a></h1>
+
   {% if employees_list %}
     <div class="table-responsive">
       <table class="table">
         <thead>
-        <tr>
-          <th>Employee ID</th>
-          <th>Position ID</th>
-          <th>Username</th>
-          <th>Is Active</th>
-        </tr>
+          <tr>
+            <th>Employee ID</th>
+            <th>Position ID</th>
+            <th>Username</th>
+            <th>Is Active</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
         </thead>
         <tbody>
-        {% for employee in employees_list %}
-          <tr>
-            <td>{{ employee.id }}</td>
-            <td>{{ employee.position.id }}</td>
-            <td>{{ employee.username }}</td>
-            <td>{{ employee.is_active }}</td>
-          </tr>
-        {% endfor %}
+          {% for employee in employees_list %}
+            <tr>
+              <td>
+                <a href="{% url 'catalog:employee-detail' pk=employee.id %}">{{ employee.id }}</a>
+              </td>
+              <td>
+                {% if employee.position %}
+                  <a href="{% url 'catalog:position-detail' pk=employee.position.id %}">{{ employee.position.id }}</a>
+                {% else %}
+                  —
+                {% endif %}
+              </td>
+              <td>{{ employee.username }}</td>
+              <td>{{ employee.is_active }}</td>
+              <td>
+                <a class="btn btn-secondary btn-sm" href="{% url 'catalog:employee-update' pk=employee.id %}">UPDATE</a>
+              </td>
+              <td>
+                <a class="btn btn-danger btn-sm" href="{% url 'catalog:employee-delete' pk=employee.id %}">DELETE</a>
+              </td>
+            </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>

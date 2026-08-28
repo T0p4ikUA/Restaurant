@@ -1,36 +1,57 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Order List<a class="btn btn-primary" style="float:right" href="">+</a></h1>
+  <h1>Order List <a class="btn btn-primary" style="float:right" href="{% url 'catalog:order-form' %}">+</a></h1>
+
   {% if orders_list %}
     <div class="table-responsive">
       <table class="table">
-        <tr>
-          <th>Order ID</th>
-          <th>Dish ID</th>
-          <th>Order taker</th>
-          <th>Customer name</th>
-          <th>Table number</th>
-          <th>Price</th>
-          <th>Created at</th>
-        </tr>
-        {% for order in orders_list %}
+        <thead>
           <tr>
-            <td>{{ order.id }}</td>
-            <td>
-              {% for dish in order.dishes.all %}
-                {{ dish.id }}{% if not forloop.last %}, {% endif %}
-              {% empty %}
-                -
-              {% endfor %}
-            </td>
-            <td>{{ order.order_taker.username|default:"-" }}</td>
-            <td>{{ order.customer_name }}</td>
-            <td>{{ order.table_number }}</td>
-            <td>{{ order.price }}</td>
-            <td>{{ order.created_at }}</td>
+            <th>Order ID</th>
+            <th>Dish ID</th>
+            <th>Order taker</th>
+            <th>Customer name</th>
+            <th>Table number</th>
+            <th>Price</th>
+            <th>Created at</th>
+            <th>Update</th>
+            <th>Delete</th>
           </tr>
-        {% endfor %}
+        </thead>
+        <tbody>
+          {% for order in orders_list %}
+            <tr>
+              <td>
+                <a href="{% url 'catalog:order-detail' pk=order.id %}">{{ order.id }}</a>
+              </td>
+              <td>
+                {% for dish in order.dishes.all %}
+                  <a href="{% url 'catalog:dish-detail' pk=dish.id %}">{{ dish.id }}</a>{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                  -
+                {% endfor %}
+              </td>
+              <td>
+                {% if order.order_taker %}
+                  <a href="{% url 'catalog:employee-detail' pk=order.order_taker.id %}">{{ order.order_taker.username }}</a>
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+              <td>{{ order.customer_name }}</td>
+              <td>{{ order.table_number }}</td>
+              <td>{{ order.price }}</td>
+              <td>{{ order.created_at }}</td>
+              <td>
+                <a class="btn btn-secondary btn-sm" href="{% url 'catalog:order-update' pk=order.id %}">UPDATE</a>
+              </td>
+              <td>
+                <a class="btn btn-danger btn-sm" href="{% url 'catalog:order-delete' pk=order.id %}">DELETE</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
       </table>
     </div>
   {% else %}

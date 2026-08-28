@@ -1,18 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Position List<a class="btn btn-primary" style="float:right" href="">+</a></h1>
+  <h1>Position List <a class="btn btn-primary" style="float:right" href="{% url 'catalog:position-form' %}">+</a></h1>
+
   {% if positions_list %}
     <div class="table-responsive">
       <table class="table">
         <tr>
-          <th>Position ID</th>
+          <th>ID</th>
           <th>Name</th>
+          <th>Update</th>
+          <th>Delete</th>
         </tr>
         {% for position in positions_list %}
           <tr>
-            <td>{{ position.id }}</td>
-            <td>{{ position.name }}</td>
+            <td>
+              {{ position.id }}
+            </td>
+            <td>
+              {{ position.name }}
+            </td>
+            <td>
+              <a class="btn btn-secondary btn-sm" href="{% url 'catalog:position-update' pk=position.id %}">UPDATE</a>
+            </td>
+            <td>
+              <a class="btn btn-danger btn-sm" href="{% url 'catalog:position-delete' pk=position.id %}">DELETE</a>
+            </td>
           </tr>
         {% endfor %}
       </table>

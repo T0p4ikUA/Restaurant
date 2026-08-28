@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Order ID: {{ order.id }} <a class="btn btn-secondary" style="float: right" href="{% url 'catalog:order-update' pk=order.id %}">Edit</a></h1>
+
+  <div class="ml-3">
+    <p><strong>Dish:</strong> 
+      {% for dish in order.dishes.all %}
+        <a href="{% url 'catalog:dish-detail' pk=dish.id %}">{{ dish.dish_name }}</a>{% if not forloop.last %}, {% endif %}
+      {% empty %}
+        —
+      {% endfor %}
+    </p>
+    <p><strong>Order Taker:</strong> 
+      {% if order.order_taker %}
+        <a href="{% url 'catalog:employee-detail' pk=order.order_taker.id %}">{{ order.order_taker.username }}</a>
+      {% else %}
+        —
+      {% endif %}
+    </p>
+    <p><strong>Customer Name:</strong> {{ order.customer_name }}</p>
+    <p><strong>Table Number:</strong> {{ order.table_number }}</p>
+    <p><strong>Price:</strong> ${{ order.price }}</p>
+    <p><strong>Created At:</strong> {{ order.created_at }}</p>
+  </div>
+{% endblock %}

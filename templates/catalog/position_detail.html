@@ -1,0 +1,4 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Name: {{position.name }} <a class="btn-btn-secondary" style="float: right" href="{% url 'catalog:position-update' pk=position.id %}">Edit</a></h1>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Employee: {{ employee.username }} <a class="btn btn-secondary" style="float: right" href="{% url 'catalog:employee-update' pk=employee.id %}">Edit</a></h1>
+
+  <div class="ml-3">
+    <p><strong>Position:</strong>
+      {% if employee.position %}
+        <a href="{% url 'catalog:position-detail' pk=employee.position.id %}">{{ employee.position.name }}</a>
+      {% else %}
+        —
+      {% endif %}
+    </p>
+    <p><strong>Is Active:</strong> {{ employee.is_active }}</p>
+  </div>
+{% endblock %}
