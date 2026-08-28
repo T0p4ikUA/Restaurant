@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
-from catalog.forms import PositionForm
+from catalog.forms import PositionForm, EmployeeForm
 from catalog.models import Position, Employee, Dish, Order
 
 
@@ -62,6 +62,30 @@ class EmployeeListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "employees_list"
     queryset = Employee.objects.select_related("position")
     paginate_by = 3
+
+
+class EmployeeCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Employee
+    template_name = "catalog/employee_form.html"
+    form_class = EmployeeForm
+    success_url = reverse_lazy("catalog:employee-list")
+
+
+class EmployeeDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Employee
+    template_name = "catalog/employee_detail.html"
+
+class EmployeeUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Employee
+    form_class = EmployeeForm
+    success_url = reverse_lazy("catalog:employee-list")
+    template_name = "catalog/employee_form.html"
+
+
+class EmployeeDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Employee
+    success_url = reverse_lazy("catalog:employee-list")
+    template_name = "catalog/employee_confirm_delete.html"
 
 
 class DishListView(LoginRequiredMixin, generic.ListView):
