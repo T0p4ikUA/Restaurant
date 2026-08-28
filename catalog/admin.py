@@ -16,16 +16,18 @@ class PositionAdmin(admin.ModelAdmin):
 @admin.register(Employee)
 class EmployeeAdmin(UserAdmin):
     list_display = UserAdmin.list_display + ("position",)
-    fieldsets = UserAdmin.fieldsets + (("Additional Info",{"fields":("position",)}),)
+    fieldsets = UserAdmin.fieldsets + (("Additional Info", {"fields": ("position",)}),)
     add_fieldsets = UserAdmin.add_fieldsets + (
-        ("Additional Info",
-         {"fields":(
-              "first_name",
-              "last_name",
-              "position",
-         )
-         },
-         ),
+        (
+            "Additional Info",
+            {
+                "fields": (
+                    "first_name",
+                    "last_name",
+                    "position",
+                )
+            },
+        ),
     )
     list_filter = ["position"]
 
@@ -57,4 +59,3 @@ class OrderAdmin(admin.ModelAdmin):
     @admin.display(description="dishes")
     def dishes(self, obj):
         return ", ".join([dish.dish_name for dish in obj.dishes.all()])
-

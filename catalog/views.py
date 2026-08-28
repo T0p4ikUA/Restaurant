@@ -1,8 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 
+from catalog.forms import PositionForm
 from catalog.models import Position, Employee, Dish, Order
 
 
@@ -28,6 +30,30 @@ class PositionListView(LoginRequiredMixin, generic.ListView):
     template_name = "catalog/position_list.html"
     context_object_name = "positions_list"
     queryset = Position.objects.all()
+
+
+class PositionCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Position
+    template_name = "catalog/position_form.html"
+    form_class = PositionForm
+    success_url = reverse_lazy("catalog:position-list")
+
+
+class PositionDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Position
+    template_name = "catalog/position_detail.html"
+
+class PositionUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Position
+    fields = "__all__"
+    success_url = reverse_lazy("catalog:position-list")
+    template_name = "catalog/position_form.html"
+
+
+class PositionDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Position
+    success_url = reverse_lazy("catalog:position-list")
+    template_name = "catalog/position_confirm_delete.html"
 
 
 class EmployeeListView(LoginRequiredMixin, generic.ListView):

@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator
 from django.db import models
 
+
 class Position(models.Model):
     name = models.CharField(max_length=255)
 
