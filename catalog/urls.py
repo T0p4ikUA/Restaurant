@@ -2,17 +2,25 @@ from django.urls import path
 from catalog.views import (
     index,
     PositionListView,
-    EmployeeListView,
-    DishListView,
-    OrderListView,
     PositionCreateView,
     PositionUpdateView,
     PositionDeleteView,
     PositionDetailView,
+    EmployeeListView,
     EmployeeCreateView,
     EmployeeUpdateView,
     EmployeeDeleteView,
     EmployeeDetailView,
+    DishListView,
+    DishCreateView,
+    DishUpdateView,
+    DishDeleteView,
+    DishDetailView,
+    OrderListView,
+    OrderCreateView,
+    OrderUpdateView,
+    OrderDeleteView,
+    OrderDetailView,
 )
 
 app_name = "catalog"
@@ -32,7 +40,6 @@ urlpatterns = [
     ),
     path("positions/<int:pk>/", PositionDetailView.as_view(), name="position-detail"),
 
-
     path("employees/", EmployeeListView.as_view(), name="employee-list"),
     path("employees/create/", EmployeeCreateView.as_view(), name="employee-form"),
     path(
@@ -46,6 +53,32 @@ urlpatterns = [
         name="employee-delete",
     ),
     path("employees/<int:pk>/", EmployeeDetailView.as_view(), name="employee-detail"),
+
     path("dishes/", DishListView.as_view(), name="dish-list"),
+    path("dishes/create/", DishCreateView.as_view(), name="dish-form"),
+    path(
+        "dishes/<int:pk>/update",
+        DishUpdateView.as_view(),
+        name="dish-update",
+    ),
+    path(
+        "dishes/<int:pk>/delete",
+        DishDeleteView.as_view(),
+        name="dish-delete",
+    ),
+    path("dishes/<int:pk>/", DishDetailView.as_view(), name="dish-detail"),
+
     path("orders/", OrderListView.as_view(), name="order-list"),
+    path("orders/create/", OrderCreateView.as_view(), name="order-form"),
+    path(
+        "orders/<int:pk>/update",
+        OrderUpdateView.as_view(),
+        name="order-update",
+    ),
+    path(
+        "orders/<int:pk>/delete",
+        OrderDeleteView.as_view(),
+        name="order-delete",
+    ),
+    path("orders/<int:pk>/", OrderDetailView.as_view(), name="order-detail"),
 ]

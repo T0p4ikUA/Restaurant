@@ -1,42 +1,53 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Dish List<a class="btn btn-primary" style="float:right" href="">+</a></h1>
+  <h1>Dish List <a class="btn btn-primary" style="float:right" href="{% url 'catalog:dish-form' %}">+</a></h1>
+
   {% if dishes_list %}
     <div class="table-responsive">
       <table class="table">
         <thead>
-        <tr>
-          <th>Dish ID</th>
-          <th>Dish Name</th>
-          <th>Price</th>
-          <th>Cooked By</th>
-          <th>description</th>
-        </tr>
+          <tr>
+            <th>Dish ID</th>
+            <th>Dish Name</th>
+            <th>Price</th>
+            <th>Cooked By</th>
+            <th>Description</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
         </thead>
         <tbody>
-        {% for dish in dishes_list %}
-          <tr>
-            <td>{{ dish.id }}</td>
-            <td>{{ dish.dish_name }}</td>
-            <td>{{ dish.price }}</td>
-            <td>{{ dish.cooked_by.username|default:"—" }}</td>
-            <td>
-              {% if dish.description %}
-                <details>
-                  <summary style="cursor: pointer; color: #0d6efd;">
-                    {{ dish.description|truncatewords:5 }}
-                  </summary>
-                  <div class="mt-2 text-muted">
-                    {{ dish.description }}
-                  </div>
-                </details>
-              {% else %}
-                —
-              {% endif %}
-            </td>
-          </tr>
-        {% endfor %}
+          {% for dish in dishes_list %}
+            <tr>
+              <td>{{ dish.id }}</td>
+              <td>
+                <a href="{% url 'catalog:dish-detail' pk=dish.id %}">{{ dish.dish_name }}</a>
+              </td>
+              <td>{{ dish.price }}</td>
+              <td>{{ dish.cooked_by.username|default:"—" }}</td>
+              <td>
+                {% if dish.description %}
+                  <details>
+                    <summary style="cursor: pointer; color: #0d6efd;">
+                      {{ dish.description|truncatewords:5 }}
+                    </summary>
+                    <div class="mt-2 text-muted">
+                      {{ dish.description }}
+                    </div>
+                  </details>
+                {% else %}
+                  —
+                {% endif %}
+              </td>
+              <td>
+                <a class="btn btn-secondary btn-sm" href="{% url 'catalog:dish-update' pk=dish.id %}">UPDATE</a>
+              </td>
+              <td>
+                <a class="btn btn-danger btn-sm" href="{% url 'catalog:dish-delete' pk=dish.id %}">DELETE</a>
+              </td>
+            </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>

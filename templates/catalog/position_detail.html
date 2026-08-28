@@ -1,14 +1,4 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Name: {{position.name }} <a class="btn-btn-secondary" style="float: right" href="{% url 'catalog:position-update' pk=position.id %}">Edit</a></h1>
-<div class="ml-3">
-  <h3>Employees with this position: </h3>
-  <ul>
-  {% for position in position.employee.all %}
-    <li>{{ employee.username }}</li>
-    {% empty %}
-    <li>No employee with this position</li>
-    {%endfor %}
-  </ul>
-</div>
 {% endblock %}

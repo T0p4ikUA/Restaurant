@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
-from catalog.forms import PositionForm, EmployeeForm
+from catalog.forms import PositionForm, EmployeeForm, DishForm
 from catalog.models import Position, Employee, Dish, Order
 
 
@@ -96,9 +96,56 @@ class DishListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 3
 
 
+class DishCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Dish
+    template_name = "catalog/dish_form.html"
+    form_class = DishForm
+    success_url = reverse_lazy("catalog:dish-list")
+
+
+class DishDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Dish
+    template_name = "catalog/dish_detail.html"
+
+class DishUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Dish
+    form_class = DishForm
+    success_url = reverse_lazy("catalog:dish-list")
+    template_name = "catalog/dish_form.html"
+
+
+class DishDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Dish
+    success_url = reverse_lazy("catalog:dish-list")
+    template_name = "catalog/dish_confirm_delete.html"
+
 class OrderListView(LoginRequiredMixin, generic.ListView):
     model = Order
     template_name = "catalog/order_list.html"
     context_object_name = "orders_list"
     queryset = Order.objects.prefetch_related("order_taker")
     paginate_by = 3
+
+
+class OrderCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Order
+    template_name = "catalog/order_form.html"
+    form_class = DishForm
+    success_url = reverse_lazy("catalog:order-list")
+
+
+class OrderDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Order
+    template_name = "catalog/order_detail.html"
+
+class OrderUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Order
+    form_class = DishForm
+    success_url = reverse_lazy("catalog:order-list")
+    template_name = "catalog/order_form.html"
+
+
+class OrderDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Order
+    success_url = reverse_lazy("catalog:order-list")
+    template_name = "catalog/order_confirm_delete.html"

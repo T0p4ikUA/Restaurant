@@ -19,8 +19,16 @@
         <tbody>
           {% for employee in employees_list %}
             <tr>
-              <td>{{ employee.id }}</td>
-              <td>{{ employee.position.id }}</td>
+              <td>
+                <a href="{% url 'catalog:employee-detail' pk=employee.id %}">{{ employee.id }}</a>
+              </td>
+              <td>
+                {% if employee.position %}
+                  <a href="{% url 'catalog:position-detail' pk=employee.position.id %}">{{ employee.position.id }}</a>
+                {% else %}
+                  —
+                {% endif %}
+              </td>
               <td>{{ employee.username }}</td>
               <td>{{ employee.is_active }}</td>
               <td>
