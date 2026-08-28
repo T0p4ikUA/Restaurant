@@ -1,6 +1,6 @@
 from django import forms
 
-from catalog.models import Position, Employee, Dish
+from catalog.models import Position, Employee, Dish, Order
 
 
 class PositionForm(forms.ModelForm):
@@ -19,3 +19,9 @@ class DishForm(forms.ModelForm):
     class Meta:
         model = Dish
         fields = ("dish_name", "price", "cooked_by", "description")
+
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ("dishes", "order_taker", "customer_name", "table_number", "price")

@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
-from catalog.forms import PositionForm, EmployeeForm, DishForm
+from catalog.forms import PositionForm, EmployeeForm, DishForm, OrderForm
 from catalog.models import Position, Employee, Dish, Order
 
 
@@ -130,7 +130,7 @@ class OrderListView(LoginRequiredMixin, generic.ListView):
 class OrderCreateView(LoginRequiredMixin, generic.CreateView):
     model = Order
     template_name = "catalog/order_form.html"
-    form_class = DishForm
+    form_class =OrderForm
     success_url = reverse_lazy("catalog:order-list")
 
 
@@ -140,7 +140,7 @@ class OrderDetailView(LoginRequiredMixin, generic.DetailView):
 
 class OrderUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Order
-    form_class = DishForm
+    form_class = OrderForm
     success_url = reverse_lazy("catalog:order-list")
     template_name = "catalog/order_form.html"
 
