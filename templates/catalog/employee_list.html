@@ -1,8 +1,16 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
   <h1>Employee List <a class="btn btn-primary" style="float:right" href="{% url 'catalog:employee-form' %}">+</a></h1>
-
+<form action="" method="get" class="row g-3 mb-3">
+  <div class="col-auto">
+    <div class="input-group">
+      {{ search_form.username }}
+      <button class="btn btn-secondary" type="submit">🔍</button>
+    </div>
+  </div>
+</form>
   {% if employees_list %}
     <div class="table-responsive">
       <table class="table">

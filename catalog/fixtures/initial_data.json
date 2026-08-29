@@ -1,0 +1,526 @@
+[
+  {
+    "model": "catalog.position",
+    "pk": 1,
+    "fields": {
+      "name": "Head Chef"
+    }
+  },
+  {
+    "model": "catalog.position",
+    "pk": 2,
+    "fields": {
+      "name": "Manager"
+    }
+  },
+  {
+    "model": "catalog.position",
+    "pk": 3,
+    "fields": {
+      "name": "Waiter"
+    }
+  },
+  {
+    "model": "catalog.position",
+    "pk": 4,
+    "fields": {
+      "name": "Bartender"
+    }
+  },
+  {
+    "model": "catalog.position",
+    "pk": 5,
+    "fields": {
+      "name": "Janitor"
+    }
+  },
+  {
+    "model": "catalog.position",
+    "pk": 6,
+    "fields": {
+      "name": "Host"
+    }
+  },
+  {
+    "model": "catalog.position",
+    "pk": 7,
+    "fields": {
+      "name": "Sous Chef"
+    }
+  },
+
+  {
+    "model": "catalog.employee",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$dummy$hash",
+      "is_superuser": false,
+      "username": "waiter_john",
+      "first_name": "John",
+      "last_name": "Smith",
+      "email": "john@restaurant.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-01T10:00:00Z",
+      "position": 3
+    }
+  },
+  {
+    "model": "catalog.employee",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$dummy$hash",
+      "is_superuser": false,
+      "username": "waiter_alice",
+      "first_name": "Alice",
+      "last_name": "Brown",
+      "email": "alice@restaurant.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-02T10:00:00Z",
+      "position": 3
+    }
+  },
+  {
+    "model": "catalog.employee",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$dummy$hash",
+      "is_superuser": false,
+      "username": "chef_bob",
+      "first_name": "Bob",
+      "last_name": "Chef",
+      "email": "bob@restaurant.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-03T10:00:00Z",
+      "position": 1
+    }
+  },
+  {
+    "model": "catalog.employee",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$dummy$hash",
+      "is_superuser": false,
+      "username": "bartender_charlie",
+      "first_name": "Charlie",
+      "last_name": "Green",
+      "email": "charlie@restaurant.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-04T10:00:00Z",
+      "position": 4
+    }
+  },
+  {
+    "model": "catalog.employee",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$dummy$hash",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "",
+      "last_name": "",
+      "email": "t.balenko12008@gmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2026-08-25T12:00:00Z",
+      "position": null
+    }
+  },
+  {
+    "model": "catalog.employee",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$dummy$hash",
+      "is_superuser": false,
+      "username": "chef_evan",
+      "first_name": "Evan",
+      "last_name": "Wright",
+      "email": "evan@restaurant.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-06T10:00:00Z",
+      "position": 7
+    }
+  },
+  {
+    "model": "catalog.employee",
+    "pk": 7,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$dummy$hash",
+      "is_superuser": false,
+      "username": "waiter_fiona",
+      "first_name": "Fiona",
+      "last_name": "Gallagher",
+      "email": "fiona@restaurant.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-07T10:00:00Z",
+      "position": 3
+    }
+  },
+  {
+    "model": "catalog.employee",
+    "pk": 8,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$dummy$hash",
+      "is_superuser": false,
+      "username": "host_george",
+      "first_name": "George",
+      "last_name": "Costanza",
+      "email": "george@restaurant.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-08T10:00:00Z",
+      "position": 6
+    }
+  },
+  {
+    "model": "catalog.employee",
+    "pk": 9,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$dummy$hash",
+      "is_superuser": false,
+      "username": "janitor_hannah",
+      "first_name": "Hannah",
+      "last_name": "Abbott",
+      "email": "hannah@restaurant.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-09T10:00:00Z",
+      "position": 5
+    }
+  },
+  {
+    "model": "catalog.employee",
+    "pk": 10,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$dummy$hash",
+      "is_superuser": false,
+      "username": "waiter_ian",
+      "first_name": "Ian",
+      "last_name": "Malcolm",
+      "email": "ian@restaurant.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-10T10:00:00Z",
+      "position": 3
+    }
+  },
+  {
+    "model": "catalog.employee",
+    "pk": 11,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$dummy$hash",
+      "is_superuser": false,
+      "username": "TarasBulba1990",
+      "first_name": "Taras",
+      "last_name": "Bulba",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-08-25T12:00:00Z",
+      "position": 1
+    }
+  },
+
+  {
+    "model": "catalog.dish",
+    "pk": 1,
+    "fields": {
+      "dish_name": "Margherita Pizza",
+      "price": "12.50",
+      "description": "Classic tomato and mozzarella pizza",
+      "cooked_by": 3
+    }
+  },
+  {
+    "model": "catalog.dish",
+    "pk": 2,
+    "fields": {
+      "dish_name": "Caesar Salad",
+      "price": "8.00",
+      "description": "Fresh romaine lettuce with Caesar dressing",
+      "cooked_by": 3
+    }
+  },
+  {
+    "model": "catalog.dish",
+    "pk": 3,
+    "fields": {
+      "dish_name": "Spaghetti Bolognese",
+      "price": "14.00",
+      "description": "Pasta with rich meat sauce",
+      "cooked_by": 6
+    }
+  },
+  {
+    "model": "catalog.dish",
+    "pk": 4,
+    "fields": {
+      "dish_name": "Mushroom Soup",
+      "price": "6.50",
+      "description": "Creamy wild mushroom soup",
+      "cooked_by": 6
+    }
+  },
+  {
+    "model": "catalog.dish",
+    "pk": 5,
+    "fields": {
+      "dish_name": "Grilled Salmon",
+      "price": "18.50",
+      "description": "Fresh Atlantic salmon with lemon butter",
+      "cooked_by": 3
+    }
+  },
+  {
+    "model": "catalog.dish",
+    "pk": 6,
+    "fields": {
+      "dish_name": "Cheeseburger",
+      "price": "11.00",
+      "description": "Beef patty with cheddar and fries",
+      "cooked_by": 3
+    }
+  },
+  {
+    "model": "catalog.dish",
+    "pk": 7,
+    "fields": {
+      "dish_name": "Greek Salad",
+      "price": "9.00",
+      "description": "Feta cheese, olives, and fresh vegetables",
+      "cooked_by": 6
+    }
+  },
+  {
+    "model": "catalog.dish",
+    "pk": 8,
+    "fields": {
+      "dish_name": "Tiramisu",
+      "price": "7.00",
+      "description": "Traditional Italian coffee-flavored dessert",
+      "cooked_by": 3
+    }
+  },
+  {
+    "model": "catalog.dish",
+    "pk": 9,
+    "fields": {
+      "dish_name": "Ribeye Steak",
+      "price": "24.00",
+      "description": "Juicy grilled beef steak",
+      "cooked_by": 3
+    }
+  },
+  {
+    "model": "catalog.dish",
+    "pk": 10,
+    "fields": {
+      "dish_name": "Lemonade",
+      "price": "4.00",
+      "description": "Fresh homemade lemonade",
+      "cooked_by": null
+    }
+  },
+  {
+    "model": "catalog.dish",
+    "pk": 11,
+    "fields": {
+      "dish_name": "Borscht",
+      "price": "10.00",
+      "description": "Traditional beet soup",
+      "cooked_by": 11
+    }
+  },
+  {
+    "model": "catalog.dish",
+    "pk": 12,
+    "fields": {
+      "dish_name": "Deruny",
+      "price": "7.00",
+      "description": "Potato pancakes",
+      "cooked_by": 11
+    }
+  },
+  {
+    "model": "catalog.dish",
+    "pk": 13,
+    "fields": {
+      "dish_name": "Kyivan kotlet",
+      "price": "7.00",
+      "description": "Chicken cutlet Kiev style",
+      "cooked_by": 11
+    }
+  },
+  {
+    "model": "catalog.dish",
+    "pk": 14,
+    "fields": {
+      "dish_name": "Varenyky",
+      "price": "8.00",
+      "description": "Dumplings with filling",
+      "cooked_by": 11
+    }
+  },
+
+  {
+    "model": "catalog.order",
+    "pk": 1,
+    "fields": {
+      "customer_name": "Alice Johnson",
+      "table_number": "1",
+      "price": "20.50",
+      "created_at": "2026-08-29T12:00:00Z",
+      "dishes": [1, 2],
+      "order_taker": 1
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 2,
+    "fields": {
+      "customer_name": "Michael Scott",
+      "table_number": "4",
+      "price": "25.00",
+      "created_at": "2026-08-29T12:15:00Z",
+      "dishes": [3, 4],
+      "order_taker": 2
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 3,
+    "fields": {
+      "customer_name": "Pam Beesly",
+      "table_number": "2",
+      "price": "18.50",
+      "created_at": "2026-08-29T12:30:00Z",
+      "dishes": [5, 10],
+      "order_taker": 7
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 4,
+    "fields": {
+      "customer_name": "Dwight Schrute",
+      "table_number": "5",
+      "price": "31.00",
+      "created_at": "2026-08-29T12:45:00Z",
+      "dishes": [6, 9],
+      "order_taker": 10
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 5,
+    "fields": {
+      "customer_name": "Jim Halpert",
+      "table_number": "3",
+      "price": "13.00",
+      "created_at": "2026-08-29T13:00:00Z",
+      "dishes": [2, 7],
+      "order_taker": 1
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 6,
+    "fields": {
+      "customer_name": "Stanley Hudson",
+      "table_number": "6",
+      "price": "24.00",
+      "created_at": "2026-08-29T13:15:00Z",
+      "dishes": [9],
+      "order_taker": 2
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 7,
+    "fields": {
+      "customer_name": "Phyllis Vance",
+      "table_number": "7",
+      "price": "11.00",
+      "created_at": "2026-08-29T13:30:00Z",
+      "dishes": [1, 10],
+      "order_taker": 7
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 8,
+    "fields": {
+      "customer_name": "Oscar Martinez",
+      "table_number": "8",
+      "price": "15.00",
+      "created_at": "2026-08-29T13:45:00Z",
+      "dishes": [8, 10],
+      "order_taker": 1
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 9,
+    "fields": {
+      "customer_name": "Kevin Malone",
+      "table_number": "9",
+      "price": "21.00",
+      "created_at": "2026-08-29T14:00:00Z",
+      "dishes": [3, 7],
+      "order_taker": 2
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 10,
+    "fields": {
+      "customer_name": "Angela Martin",
+      "table_number": "10",
+      "price": "12.50",
+      "created_at": "2026-08-29T14:15:00Z",
+      "dishes": [2, 10],
+      "order_taker": 7
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 11,
+    "fields": {
+      "customer_name": "Alex Johnson",
+      "table_number": "3",
+      "price": "17.00",
+      "created_at": "2026-08-25T16:58:00Z",
+      "dishes": [11, 12],
+      "order_taker": 1
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 12,
+    "fields": {
+      "customer_name": "Maria Garcia",
+      "table_number": "5",
+      "price": "8.00",
+      "created_at": "2026-08-25T16:58:00Z",
+      "dishes": [12],
+      "order_taker": 1
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 13,
+    "fields": {
+      "customer_name": "Robert Davis",
+      "table_number": "1",
+      "price": "14.00",
+      "created_at": "2026-08-25T16:59:00Z",
+      "dishes": [13, 14],
+      "order_taker": 1
+    }
+  }
+]
