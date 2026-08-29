@@ -99,7 +99,9 @@ class EmployeeListView(LoginRequiredMixin, generic.ListView):
         queryset = Employee.objects.select_related("position")
         form = EmployeeSearchForm(self.request.GET)
         if form.is_valid() and form.cleaned_data.get("username"):
-            return queryset.filter(username__icontains=form.cleaned_data["username"])
+            return queryset.filter(
+                username__icontains=form.cleaned_data["username"]
+            )
         return queryset
 
 
@@ -146,7 +148,9 @@ class DishListView(LoginRequiredMixin, generic.ListView):
         queryset = Dish.objects.select_related("cooked_by")
         form = DishSearchForm(self.request.GET)
         if form.is_valid() and form.cleaned_data.get("dish_name"):
-            return queryset.filter(dish_name__icontains=form.cleaned_data["dish_name"])
+            return queryset.filter(
+                dish_name__icontains=form.cleaned_data["dish_name"]
+            )
         return queryset
 
 
@@ -190,10 +194,16 @@ class OrderListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        queryset = Order.objects.select_related("order_taker").prefetch_related("dishes")
+        queryset = (
+            Order.objects
+            .select_related("order_taker")
+            .prefetch_related("dishes")
+        )
         form = OrderSearchForm(self.request.GET)
         if form.is_valid() and form.cleaned_data.get("customer_name"):
-            return queryset.filter(customer_name__icontains=form.cleaned_data["customer_name"])
+            return queryset.filter(
+                customer_name__icontains=form.cleaned_data["customer_name"]
+            )
         return queryset
 
 
