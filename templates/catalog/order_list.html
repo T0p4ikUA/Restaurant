@@ -1,8 +1,15 @@
 {% extends "base.html" %}
-
+{% load crispy_forms_tags %}
 {% block content %}
   <h1>Order List <a class="btn btn-primary" style="float:right" href="{% url 'catalog:order-form' %}">+</a></h1>
-
+  <form action="" method="get" class="row g-3 mb-3">
+  <div class="col-auto">
+    <div class="input-group">
+      {{ search_form.customer_name }}
+      <button class="btn btn-secondary" type="submit">🔍</button>
+    </div>
+  </div>
+</form>
   {% if orders_list %}
     <div class="table-responsive">
       <table class="table">
