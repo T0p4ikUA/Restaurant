@@ -76,7 +76,7 @@ class ModelsTest(TestCase):
     def test_employee_ordering(self):
         Employee.objects.all().delete()
         emp1 = Employee.objects.create(username="zack", position=self.position)
-        emp2 = Employee.objects.create(username="alice", position=self.position)
+        emp2 = Employee.objects.create(username="john", position=self.position)
         employees = Employee.objects.all()
         self.assertEqual(list(employees), [emp2, emp1])
 

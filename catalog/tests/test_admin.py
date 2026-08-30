@@ -8,7 +8,7 @@ from catalog.models import Position, Dish
 class AdminSiteTest(TestCase):
     def setUp(self):
         self.client = Client()
-        self.admin_user =(
+        self.admin_user = (
             get_user_model().objects.create_superuser(
                 username="admin",
                 password="testadmin123"
@@ -22,7 +22,7 @@ class AdminSiteTest(TestCase):
         )
         self.dish = Dish.objects.create(
             dish_name="soup",
-            description = "taste soup",
+            description="taste soup",
             price=10.00,
         )
 
@@ -44,7 +44,10 @@ class AdminSiteTest(TestCase):
         """
         for action in ["change", "delete"]:
             with self.subTest(action=action):
-                url = reverse(f"admin:catalog_position_{action}", args=[self.position.id])
+                url = reverse(
+                    f"admin:catalog_position_{action}",
+                    args=[self.position.id]
+                )
                 response = self.client.get(url)
                 self.assertEqual(response.status_code, 200)
 

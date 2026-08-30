@@ -1,7 +1,6 @@
 from django.test import TestCase
 
 from catalog.forms import PositionForm, EmployeeForm, DishForm, OrderForm
-from catalog.models import Employee, Position
 
 
 class FormsTest(TestCase):
