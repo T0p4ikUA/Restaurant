@@ -37,7 +37,7 @@ class EmployeeAdmin(UserAdmin):
 
 @admin.register(Dish)
 class DishAdmin(admin.ModelAdmin):
-    list_display = ["dish_name", "price", "cooked_by"]
+    list_display = ["dish_name", "price", "cooked_by", "description"]
     list_filter = ["cooked_by"]
     search_fields = ["dish_name"]
 
