@@ -2,16 +2,30 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<h1>Login</h1>
+<div class="row justify-content-center mt-5">
+  <div class="col-md-6 col-lg-5">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4">
+        <h2 class="text-center mb-4 fw-bold">Login</h2>
 
-{% if form.errors %}
-<p style="color:red;">Invalid credentials</p>
-{% endif %}
+        {% if form.errors %}
+          <div class="alert alert-danger py-2 small" role="alert">
+            Invalid credentials. Please try again.
+          </div>
+        {% endif %}
 
-<form action="{% url 'login' %}" method="post" autocomplete="off">
-  {% csrf_token %}
-  {{ form|crispy }}
-  <input type="submit" value="Submit" class="btn btn-primary">
-  <input type="hidden" name="next" value="{{ next }}">
-</form>
+        <form action="{% url 'login' %}" method="post" autocomplete="off">
+          {% csrf_token %}
+          <div class="mb-3">
+            {{ form|crispy }}
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+          </div>
+          <input type="hidden" name="next" value="{{ next }}">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

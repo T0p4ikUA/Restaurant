@@ -1,10 +1,45 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
+
 {% block content %}
-<h1> {{ object|yesno:"Update,Create" }}Order</h1>
-<form action="" method="post" novalidate>
-  {% csrf_token %}
-   {{ form|crispy }}
-  <input class="btn btn-primary" type="submit" value="Submit">
-</form>
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4">
+        <h2 class="fw-bold mb-4">{{ object|yesno:"Update,Create" }} Order</h2>
+        <form action="" method="post" novalidate>
+          {% csrf_token %}
+          <div class="mb-3">
+            {{ form|crispy }}
+          </div>
+          <button class="btn btn-primary w-100" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const checkboxes = document.querySelectorAll("input[name='dishes']");
+        const priceInput = document.getElementById("id_price");
+
+        function updatePrice() {
+            let total = 0;
+            checkboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    let labelText = checkbox.parentElement.textContent;
+                    let match = labelText.match(/\$(\d+(\.\d+)?)/);
+                    if (match) {
+                        total += parseFloat(match[1]);
+                    }
+                }
+            });
+            priceInput.value = total.toFixed(2);
+        }
+
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener("change", updatePrice);
+        });
+    });
+</script>
 {% endblock %}

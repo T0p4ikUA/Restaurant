@@ -1,32 +1,36 @@
-<ul class="sidebar-nav list-group">
-  {% if user.is_authenticated %}
-  <li class="list-group-item">
-    User: {{ user.username }}
-  </li>
-  <li class="list-group-item">
-    <form action="{% url 'logout' %}" method="post">
-      {% csrf_token %}
-      <button class="btn btn-link nav-link" type="submit">Logout</button>
-    </form>
-  </li>
-  {% else %}
-   <li class="list-group-item">
-     <a href="{% url 'login' %}">Login</a>
-   </li>
-  {% endif %}
-  <li class="list-group-item">
-    <a href="{% url 'catalog:index' %}">Home</a>
-  </li>
-  <li class="list-group-item">
-    <a href="{% url 'catalog:order-list' %}">Orders</a>
-  </li>
-  <li class="list-group-item">
-    <a href="{% url 'catalog:position-list' %}">Positions</a>
-  </li>
-  <li class="list-group-item">
-    <a href="{% url 'catalog:employee-list' %}">Employees</a>
-  </li>
-  <li class="list-group-item">
-    <a href="{% url 'catalog:dish-list' %}">Dishes</a>
-  </li>
-</ul>
+<div class="d-flex flex-column h-100">
+  <div class="mb-4">
+    <h3 class="text-white fs-5 px-2 mb-3">Restaurant</h3>
+    <ul class="nav nav-pills flex-column gap-1">
+      <li class="nav-item">
+        <a class="nav-link text-white {% if request.resolver_match.url_name == 'index' %}active bg-primary{% endif %}" href="{% url 'catalog:index' %}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white {% if 'order' in request.resolver_match.url_name %}active bg-primary{% endif %}" href="{% url 'catalog:order-list' %}">Orders</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white {% if 'position' in request.resolver_match.url_name %}active bg-primary{% endif %}" href="{% url 'catalog:position-list' %}">Positions</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white {% if 'employee' in request.resolver_match.url_name %}active bg-primary{% endif %}" href="{% url 'catalog:employee-list' %}">Employees</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white {% if 'dish' in request.resolver_match.url_name %}active bg-primary{% endif %}" href="{% url 'catalog:dish-list' %}">Dishes</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="mt-auto border-top border-secondary pt-3">
+    {% if user.is_authenticated %}
+      <div class="px-2 mb-2 text-muted small">
+        User: <span class="text-white fw-bold">{{ user.username }}</span>
+      </div>
+      <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-outline-danger btn-sm w-100" type="submit">Logout</button>
+      </form>
+    {% else %}
+      <a class="btn btn-outline-success btn-sm w-100" href="{% url 'login' %}">Login</a>
+    {% endif %}
+  </div>
+</div>

@@ -1,47 +1,54 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+
 {% block content %}
-  <h1>Order List <a class="btn btn-primary" style="float:right" href="{% url 'catalog:order-form' %}">+</a></h1>
-  <form action="" method="get" class="row g-3 mb-3">
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="fw-bold mb-0">Order List</h2>
+  <a class="btn btn-primary btn-sm px-3" href="{% url 'catalog:order-form' %}">+ Add Order</a>
+</div>
+
+<form action="" method="get" class="row g-3 mb-4">
   <div class="col-auto">
     <div class="input-group">
       {{ search_form.customer_name }}
-      <button class="btn btn-secondary" type="submit">🔍</button>
+      <button class="btn btn-outline-secondary" type="submit">🔍</button>
     </div>
   </div>
 </form>
-  {% if orders_list %}
+
+{% if orders_list %}
+  <div class="card shadow-sm border-0">
     <div class="table-responsive">
-      <table class="table">
-        <thead>
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
           <tr>
-            <th>Order ID</th>
-            <th>Dish ID</th>
-            <th>Order taker</th>
-            <th>Customer name</th>
-            <th>Table number</th>
-            <th>Price</th>
-            <th>Created at</th>
-            <th>Update</th>
-            <th>Delete</th>
+            <th class="py-3">Order ID</th>
+            <th class="py-3">Dish ID</th>
+            <th class="py-3">Order taker</th>
+            <th class="py-3">Customer name</th>
+            <th class="py-3">Table number</th>
+            <th class="py-3">Price</th>
+            <th class="py-3">Created at</th>
+            <th class="py-3 text-end">Update</th>
+            <th class="py-3 text-end">Delete</th>
           </tr>
         </thead>
         <tbody>
           {% for order in orders_list %}
             <tr>
-              <td>
-                <a href="{% url 'catalog:order-detail' pk=order.id %}">{{ order.id }}</a>
+              <td class="fw-bold">
+                <a href="{% url 'catalog:order-detail' pk=order.id %}" class="text-decoration-none">{{ order.id }}</a>
               </td>
               <td>
                 {% for dish in order.dishes.all %}
-                  <a href="{% url 'catalog:dish-detail' pk=dish.id %}">{{ dish.id }}</a>{% if not forloop.last %}, {% endif %}
+                  <a href="{% url 'catalog:dish-detail' pk=dish.id %}" class="text-decoration-none">{{ dish.id }}</a>{% if not forloop.last %}, {% endif %}
                 {% empty %}
                   -
                 {% endfor %}
               </td>
               <td>
                 {% if order.order_taker %}
-                  <a href="{% url 'catalog:employee-detail' pk=order.order_taker.id %}">{{ order.order_taker.username }}</a>
+                  <a href="{% url 'catalog:employee-detail' pk=order.order_taker.id %}" class="text-decoration-none">{{ order.order_taker.username }}</a>
                 {% else %}
                   -
                 {% endif %}
@@ -50,18 +57,21 @@
               <td>{{ order.table_number }}</td>
               <td>{{ order.price }}</td>
               <td>{{ order.created_at }}</td>
-              <td>
-                <a class="btn btn-secondary btn-sm" href="{% url 'catalog:order-update' pk=order.id %}">UPDATE</a>
+              <td class="text-end">
+                <a class="btn btn-outline-secondary btn-sm" href="{% url 'catalog:order-update' pk=order.id %}">Update</a>
               </td>
-              <td>
-                <a class="btn btn-danger btn-sm" href="{% url 'catalog:order-delete' pk=order.id %}">DELETE</a>
+              <td class="text-end">
+                <a class="btn btn-outline-danger btn-sm" href="{% url 'catalog:order-delete' pk=order.id %}">Delete</a>
               </td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
-  {% else %}
-    <p>There are no orders in restaurant.</p>
-  {% endif %}
+  </div>
+{% else %}
+  <div class="alert alert-info" role="alert">
+    There are no orders in restaurant.
+  </div>
+{% endif %}
 {% endblock %}
