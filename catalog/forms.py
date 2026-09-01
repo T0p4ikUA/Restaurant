@@ -81,6 +81,9 @@ class OrderForm(forms.ModelForm):
         )
         widgets = {
             "dishes": forms.CheckboxSelectMultiple(),
+            "price": forms.NumberInput(
+                attrs={"readonly": "readonly", "id": "id_price"}
+            ),
         }
 
     def clean_price(self):
@@ -88,6 +91,15 @@ class OrderForm(forms.ModelForm):
         if price is not None and price < 0:
             raise forms.ValidationError("Price cannot be negative.")
         return price
+
+    def save(self, commit=True):
+        order = super().save(commit=False)
+        if commit:
+            order.save()
+            self.save_m2m()
+            order.price = sum(dish.price for dish in order.dishes.all())
+            order.save(update_fields=["price"])
+        return order
 
 
 class OrderSearchForm(forms.Form):

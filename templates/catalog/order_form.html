@@ -18,4 +18,28 @@
     </div>
   </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const checkboxes = document.querySelectorAll("input[name='dishes']");
+        const priceInput = document.getElementById("id_price");
+
+        function updatePrice() {
+            let total = 0;
+            checkboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    let labelText = checkbox.parentElement.textContent;
+                    let match = labelText.match(/\$(\d+(\.\d+)?)/);
+                    if (match) {
+                        total += parseFloat(match[1]);
+                    }
+                }
+            });
+            priceInput.value = total.toFixed(2);
+        }
+
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener("change", updatePrice);
+        });
+    });
+</script>
 {% endblock %}
