@@ -1,3 +1,12 @@
 [flake8]
-exclude = */migrations/*
-max-line-length=79
+exclude =
+    migrations,
+    venv,
+    env,
+    */migrations/*
+max-line-length = 79
+ignore =
+    E501,
+    W503
+per-file-ignores =
+    */settings.py: E501, F401

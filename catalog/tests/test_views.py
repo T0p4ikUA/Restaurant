@@ -23,7 +23,13 @@ class ViewsTest(TestCase):
         self.client.logout()
         response = self.client.get(reverse("catalog:order-list"))
         self.assertEqual(response.status_code, 302)
-        login_url = reverse("catalog:login") if "catalog:login" in [r.name for r in reverse.__globals__.get('urlresolver', [])] else "/accounts/login/"
+        login_url = (
+            reverse("catalog:login")
+            if "catalog:login" in [
+                r.name for r in reverse.__globals__.get('urlresolver', [])
+            ]
+            else "/accounts/login/"
+        )
         order_list_url = reverse("catalog:order-list")
         self.assertRedirects(
             response,
