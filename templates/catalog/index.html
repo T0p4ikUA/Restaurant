@@ -1,16 +1,51 @@
 {% extends "base.html" %}
+
 {% block title %}
   <title>Restaurant Home</title>
 {% endblock %}
+
 {% block content %}
-  <h1>Restaurant</h1>
-  <p>Welcome to Restaurant "Bezdohannyyi"</p>
-  <h3>Restaurant Content:</h3>
-  <ul>
-    <li>The number of positions in restaurant: {{ num_pos }}</li>
-    <li>The number of employees in restaurant: {{ num_emp }}</li>
-    <li>The number of dishes in restaurant: {{ num_dis }}</li>
-    <li>The number of orders in restaurant: {{ num_ord }}</li>
-  </ul>
-  <p>you have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.</p>
+  <div class="p-4 mb-4 bg-white rounded shadow-sm">
+    <h1 class="display-5 fw-bold mb-3">Restaurant</h1>
+    <p class="lead text-muted">Welcome to Restaurant "Bezdohannyyi"</p>
+  </div>
+
+  <div class="row g-4 mb-4">
+    <div class="col-md-3 col-sm-6">
+      <div class="card bg-primary text-white shadow-sm h-100">
+        <div class="card-body">
+          <h6 class="card-title text-uppercase small">Positions</h6>
+          <p class="display-6 fw-bold mb-0">{{ num_pos }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+      <div class="card bg-success text-white shadow-sm h-100">
+        <div class="card-body">
+          <h6 class="card-title text-uppercase small">Employees</h6>
+          <p class="display-6 fw-bold mb-0">{{ num_emp }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+      <div class="card bg-warning text-dark shadow-sm h-100">
+        <div class="card-body">
+          <h6 class="card-title text-uppercase small">Dishes</h6>
+          <p class="display-6 fw-bold mb-0">{{ num_dis }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+      <div class="card bg-info text-white shadow-sm h-100">
+        <div class="card-body">
+          <h6 class="card-title text-uppercase small">Orders</h6>
+          <p class="display-6 fw-bold mb-0">{{ num_ord }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card bg-white shadow-sm p-3">
+    <p class="mb-0 text-secondary">You have visited this page <span class="fw-bold text-dark">{{ num_visits }}</span> time{{ num_visits|pluralize }}.</p>
+  </div>
 {% endblock %}
