@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from catalog.forms import DishForm, EmployeeForm, OrderForm, PositionForm
-from catalog.models import Employee, Position
+from catalog.models import Dish, Employee, Position
 
 
 class FormsTest(TestCase):
@@ -11,6 +11,11 @@ class FormsTest(TestCase):
             username="test_taker",
             password="securepassword123",
             position=self.position,
+        )
+
+        self.dish = Dish.objects.create(
+            dish_name="soup",
+            price=10.00,
         )
 
         self.dish_data = {
@@ -32,6 +37,7 @@ class FormsTest(TestCase):
             "customer_name": "customer123",
             "table_number": "12",
             "price": 20,
+            "dishes": [self.dish.id],
             "order_taker": self.employee.id,
         }
 
@@ -52,10 +58,16 @@ class FormsTest(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_negative_price(self):
-        dish_data = {"dish_name": "soup", "price": -1}
+        dish_data = {
+            "dish_name": "soup",
+            "price": -1,
+            "description": "A soup",
+        }
         order_data = {
             "customer_name": "customer123",
+            "table_number": "12",
             "price": -1,
+            "dishes": [self.dish.id],
             "order_taker": self.employee.id,
         }
         form1 = DishForm(data=dish_data)
@@ -77,6 +89,7 @@ class FormsTest(TestCase):
         self.assertIn("table_number", form.errors)
         self.assertIn("price", form.errors)
         self.assertIn("customer_name", form.errors)
+        self.assertIn("dishes", form.errors)
         self.assertIn("order_taker", form.errors)
 
     def test_position_form_missing_required_fields(self):

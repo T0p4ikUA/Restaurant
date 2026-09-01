@@ -1,10 +1,9 @@
 from django import forms
 from django.contrib import admin
-
 from django.contrib.auth.admin import UserAdmin
 from django.db import models
 
-from catalog.models import Employee, Position, Dish, Order
+from catalog.models import Position, Employee, Dish, Order
 
 
 @admin.register(Position)
@@ -17,8 +16,7 @@ class PositionAdmin(admin.ModelAdmin):
 class EmployeeAdmin(UserAdmin):
     list_display = UserAdmin.list_display + ("position",)
     fieldsets = UserAdmin.fieldsets + (
-        ("Additional Info",
-         {"fields": ("position",)}),
+        ("Additional Info", {"fields": ("position",)}),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
         (
@@ -50,7 +48,7 @@ class OrderAdmin(admin.ModelAdmin):
         "table_number",
         "price",
         "created_at",
-        "dishes",
+        "dishes_list",
         "order_taker",
     ]
     list_filter = ["created_at", "order_taker"]
@@ -60,5 +58,5 @@ class OrderAdmin(admin.ModelAdmin):
     }
 
     @admin.display(description="dishes")
-    def dishes(self, obj):
+    def dishes_list(self, obj):
         return ", ".join([dish.dish_name for dish in obj.dishes.all()])

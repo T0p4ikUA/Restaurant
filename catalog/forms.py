@@ -48,6 +48,12 @@ class DishForm(forms.ModelForm):
         model = Dish
         fields = ("dish_name", "price", "cooked_by", "description")
 
+    def clean_price(self):
+        price = self.cleaned_data.get("price")
+        if price is not None and price < 0:
+            raise forms.ValidationError("Price cannot be negative.")
+        return price
+
 
 class DishSearchForm(forms.Form):
     dish_name = forms.CharField(
@@ -67,12 +73,21 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = (
-            "dish",
+            "dishes",
             "order_taker",
             "customer_name",
             "table_number",
             "price",
         )
+        widgets = {
+            "dishes": forms.CheckboxSelectMultiple(),
+        }
+
+    def clean_price(self):
+        price = self.cleaned_data.get("price")
+        if price is not None and price < 0:
+            raise forms.ValidationError("Price cannot be negative.")
+        return price
 
 
 class OrderSearchForm(forms.Form):

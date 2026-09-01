@@ -1,6 +1,4 @@
-from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -18,7 +16,7 @@ from catalog.forms import (
 from catalog.models import Dish, Employee, Order, Position
 
 
-def index(request: HttpRequest) -> HttpResponse:
+def index(request):
     num_pos = Position.objects.count()
     num_emp = Employee.objects.count()
     num_dis = Dish.objects.count()
@@ -189,19 +187,13 @@ class OrderListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         customer_name = self.request.GET.get("customer_name", "")
-        context["search_file"] = OrderSearchForm(
-            initial={"customer_name": customer_name}
-        )
         context["search_form"] = OrderSearchForm(
             initial={"customer_name": customer_name}
         )
         return context
 
     def get_queryset(self):
-        queryset = (
-            Order.objects
-            .select_related("order_taker", "dish")
-        )
+        queryset = Order.objects.all().prefetch_related("dishes")
         form = OrderSearchForm(self.request.GET)
         if form.is_valid() and form.cleaned_data.get("customer_name"):
             return queryset.filter(

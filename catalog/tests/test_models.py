@@ -11,10 +11,10 @@ class ModelsTest(TestCase):
             username="bob123",
             position=self.position,
         )
-        self.dish_data = {
-            "dish_name": "soup",
-            "price": 10.00,
-        }
+        self.dish = Dish.objects.create(
+            dish_name="soup",
+            price=10.00,
+        )
         self.order_data = {
             "customer_name": "customer123",
             "table_number": "12",
@@ -39,27 +39,22 @@ class ModelsTest(TestCase):
         )
 
     def test_order_format_str(self):
-        order = Order.objects.create(
-            **self.order_data
-        )
+        order = Order.objects.create(**self.order_data)
+        order.dishes.set([self.dish])
         self.assertEqual(
             str(order),
             f"{order.customer_name} (Table: {order.table_number})"
         )
 
     def test_dish_order_format_str(self):
-        dish = Dish.objects.create(
-            **self.dish_data
-        )
         self.assertEqual(
-            str(dish),
-            f"{dish.dish_name} (${dish.price})"
+            str(self.dish),
+            f"{self.dish.dish_name} (${self.dish.price})"
         )
 
     def test_order_ordering(self):
-        order1 = Order.objects.create(
-            **self.order_data
-        )
+        order1 = Order.objects.create(**self.order_data)
+        order1.dishes.set([self.dish])
         sleep(0.01)
         order2 = Order.objects.create(
             customer_name="Bob",
@@ -67,13 +62,18 @@ class ModelsTest(TestCase):
             price=20,
             order_taker=self.employee
         )
+        order2.dishes.set([self.dish])
         orders = Order.objects.all()
         self.assertEqual(list(orders), [order2, order1])
 
     def test_employee_ordering(self):
         Employee.objects.filter(username__in=["zack", "john"]).delete()
-        emp1 = Employee.objects.create(username="zack", position=self.position)
-        emp2 = Employee.objects.create(username="john", position=self.position)
+        emp1 = Employee.objects.create(
+            username="zack", position=self.position
+        )
+        emp2 = Employee.objects.create(
+            username="john", position=self.position
+        )
         employees = Employee.objects.filter(username__in=["zack", "john"])
         self.assertEqual(list(employees), [emp2, emp1])
 
