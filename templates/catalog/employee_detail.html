@@ -1,16 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Employee: {{ employee.username }} <a class="btn btn-secondary" style="float: right" href="{% url 'catalog:employee-update' pk=employee.id %}">Edit</a></h1>
+<div class="card shadow-sm border-0 p-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold mb-0">Employee: <span class="text-muted">{{ employee.username }}</span></h2>
+    <a class="btn btn-outline-secondary" href="{% url 'catalog:employee-update' pk=employee.id %}">Edit Employee</a>
+  </div>
 
-  <div class="ml-3">
-    <p><strong>Position:</strong>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item px-0">
+      <strong>Position:</strong>
       {% if employee.position %}
-        <a href="{% url 'catalog:position-detail' pk=employee.position.id %}">{{ employee.position.name }}</a>
+        <a href="{% url 'catalog:position-detail' pk=employee.position.id %}" class="text-decoration-none">{{ employee.position.name }}</a>
       {% else %}
         —
       {% endif %}
-    </p>
-    <p><strong>Is Active:</strong> {{ employee.is_active }}</p>
-  </div>
+    </li>
+    <li class="list-group-item px-0">
+      <strong>Is Active:</strong>
+      {% if employee.is_active %}
+        <span class="badge bg-success">Active</span>
+      {% else %}
+        <span class="badge bg-secondary">Inactive</span>
+      {% endif %}
+    </li>
+  </ul>
+</div>
 {% endblock %}
