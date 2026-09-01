@@ -1,4 +1,10 @@
 {% extends "base.html" %}
+
 {% block content %}
-<h1>Name: {{position.name }} <a class="btn-btn-secondary" style="float: right" href="{% url 'catalog:position-update' pk=position.id %}">Edit</a></h1>
+<div class="card shadow-sm border-0 p-4">
+  <div class="d-flex justify-content-between align-items-center">
+    <h2 class="fw-bold mb-0">Position: <span class="text-muted">{{ position.name }}</span></h2>
+    <a class="btn btn-outline-secondary" href="{% url 'catalog:position-update' pk=position.id %}">Edit Position</a>
+  </div>
+</div>
 {% endblock %}
