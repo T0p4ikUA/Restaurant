@@ -1,45 +1,52 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+
 {% block content %}
-  <h1>Dish List <a class="btn btn-primary" style="float:right" href="{% url 'catalog:dish-form' %}">+</a></h1>
-  <form action="" method="get" class="row g-3 mb-3">
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="fw-bold mb-0">Dish List</h2>
+  <a class="btn btn-primary btn-sm px-3" href="{% url 'catalog:dish-form' %}">+ Add Dish</a>
+</div>
+
+<form action="" method="get" class="row g-3 mb-4">
   <div class="col-auto">
     <div class="input-group">
       {{ search_form.dish_name }}
-      <button class="btn btn-secondary" type="submit">🔍</button>
+      <button class="btn btn-outline-secondary" type="submit">🔍</button>
     </div>
   </div>
 </form>
-  {% if dishes_list %}
+
+{% if dishes_list %}
+  <div class="card shadow-sm border-0">
     <div class="table-responsive">
-      <table class="table">
-        <thead>
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
           <tr>
-            <th>Dish ID</th>
-            <th>Dish Name</th>
-            <th>Price</th>
-            <th>Cooked By</th>
-            <th>Description</th>
-            <th>Update</th>
-            <th>Delete</th>
+            <th class="py-3">Dish ID</th>
+            <th class="py-3">Dish Name</th>
+            <th class="py-3">Price</th>
+            <th class="py-3">Cooked By</th>
+            <th class="py-3">Description</th>
+            <th class="py-3 text-end">Update</th>
+            <th class="py-3 text-end">Delete</th>
           </tr>
         </thead>
         <tbody>
           {% for dish in dishes_list %}
             <tr>
-              <td>{{ dish.id }}</td>
+              <td class="fw-bold">{{ dish.id }}</td>
               <td>
-                <a href="{% url 'catalog:dish-detail' pk=dish.id %}">{{ dish.dish_name }}</a>
+                <a href="{% url 'catalog:dish-detail' pk=dish.id %}" class="text-decoration-none">{{ dish.dish_name }}</a>
               </td>
-              <td>{{ dish.price }}</td>
+              <td>${{ dish.price }}</td>
               <td>{{ dish.cooked_by.username|default:"—" }}</td>
               <td>
                 {% if dish.description %}
                   <details>
-                    <summary style="cursor: pointer; color: #0d6efd;">
+                    <summary style="cursor: pointer;" class="text-primary">
                       {{ dish.description|truncatewords:5 }}
                     </summary>
-                    <div class="mt-2 text-muted">
+                    <div class="mt-2 text-muted small">
                       {{ dish.description }}
                     </div>
                   </details>
@@ -47,18 +54,21 @@
                   —
                 {% endif %}
               </td>
-              <td>
-                <a class="btn btn-secondary btn-sm" href="{% url 'catalog:dish-update' pk=dish.id %}">UPDATE</a>
+              <td class="text-end">
+                <a class="btn btn-outline-secondary btn-sm" href="{% url 'catalog:dish-update' pk=dish.id %}">Update</a>
               </td>
-              <td>
-                <a class="btn btn-danger btn-sm" href="{% url 'catalog:dish-delete' pk=dish.id %}">DELETE</a>
+              <td class="text-end">
+                <a class="btn btn-outline-danger btn-sm" href="{% url 'catalog:dish-delete' pk=dish.id %}">Delete</a>
               </td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
-  {% else %}
-    <p>There are no dishes in restaurant.</p>
-  {% endif %}
+  </div>
+{% else %}
+  <div class="alert alert-info" role="alert">
+    There are no dishes in restaurant.
+  </div>
+{% endif %}
 {% endblock %}
