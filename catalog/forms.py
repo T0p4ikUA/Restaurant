@@ -1,12 +1,12 @@
 from django import forms
 
-from catalog.models import Position, Employee, Dish, Order
+from catalog.models import Dish, Employee, Order, Position
 
 
 class PositionForm(forms.ModelForm):
     class Meta:
         model = Position
-        fields = "__all__"
+        fields = ("name",)
 
 
 class PositionSearchForm(forms.Form):
@@ -15,7 +15,10 @@ class PositionSearchForm(forms.Form):
         required=False,
         label="",
         widget=forms.TextInput(
-            attrs={"placeholder": "Search by name", "class": "form-control"}
+            attrs={
+                "placeholder": "Search by name",
+                "class": "form-control"
+            }
         ),
     )
 
@@ -32,8 +35,10 @@ class EmployeeSearchForm(forms.Form):
         required=False,
         label="",
         widget=forms.TextInput(
-            attrs={"placeholder": "Search by username",
-                   "class": "form-control"}
+            attrs={
+                "placeholder": "Search by username",
+                "class": "form-control"
+            }
         ),
     )
 
@@ -50,8 +55,10 @@ class DishSearchForm(forms.Form):
         required=False,
         label="",
         widget=forms.TextInput(
-            attrs={"placeholder": "Search by name of dish",
-                   "class": "form-control"}
+            attrs={
+                "placeholder": "Search by name of dish",
+                "class": "form-control"
+            }
         ),
     )
 
@@ -60,11 +67,11 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = (
-            "dishes",
+            "dish",
             "order_taker",
             "customer_name",
             "table_number",
-            "price"
+            "price",
         )
 
 
@@ -74,7 +81,9 @@ class OrderSearchForm(forms.Form):
         required=False,
         label="",
         widget=forms.TextInput(
-            attrs={"placeholder": "Search by customer name",
-                   "class": "form-control"}
+            attrs={
+                "placeholder": "Search by customer name",
+                "class": "form-control"
+            }
         ),
     )

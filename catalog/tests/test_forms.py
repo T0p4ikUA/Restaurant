@@ -1,15 +1,22 @@
 from django.test import TestCase
 
-from catalog.forms import PositionForm, EmployeeForm, DishForm, OrderForm
+from catalog.forms import DishForm, EmployeeForm, OrderForm, PositionForm
+from catalog.models import Employee, Position
 
 
 class FormsTest(TestCase):
     def setUp(self):
+        self.position = Position.objects.create(name="Waiter")
+        self.employee = Employee.objects.create_user(
+            username="test_taker",
+            password="securepassword123",
+            position=self.position,
+        )
+
         self.dish_data = {
             "dish_name": "soup",
             "price": 10.00,
             "description": "A soup",
-
         }
         self.position_data = {
             "name": "Manager",
@@ -19,12 +26,13 @@ class FormsTest(TestCase):
             "last_name": "Doe",
             "password": "securepassword123",
             "username": "Jo123",
-
+            "position": self.position.id,
         }
         self.order_data = {
             "customer_name": "customer123",
             "table_number": "12",
             "price": 20,
+            "order_taker": self.employee.id,
         }
 
     def test_position_is_valid(self):
@@ -47,7 +55,8 @@ class FormsTest(TestCase):
         dish_data = {"dish_name": "soup", "price": -1}
         order_data = {
             "customer_name": "customer123",
-            "price": -1
+            "price": -1,
+            "order_taker": self.employee.id,
         }
         form1 = DishForm(data=dish_data)
         form2 = OrderForm(data=order_data)
@@ -68,6 +77,7 @@ class FormsTest(TestCase):
         self.assertIn("table_number", form.errors)
         self.assertIn("price", form.errors)
         self.assertIn("customer_name", form.errors)
+        self.assertIn("order_taker", form.errors)
 
     def test_position_form_missing_required_fields(self):
         form = PositionForm(data={})
@@ -78,4 +88,4 @@ class FormsTest(TestCase):
         form = EmployeeForm(data={})
         self.assertFalse(form.is_valid())
         self.assertIn("username", form.errors)
-        self.assertNotIn("position", form.errors)
+        self.assertIn("position", form.errors)

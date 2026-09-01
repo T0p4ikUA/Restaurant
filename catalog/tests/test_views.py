@@ -23,9 +23,11 @@ class ViewsTest(TestCase):
         self.client.logout()
         response = self.client.get(reverse("catalog:order-list"))
         self.assertEqual(response.status_code, 302)
+        login_url = reverse("catalog:login") if "catalog:login" in [r.name for r in reverse.__globals__.get('urlresolver', [])] else "/accounts/login/"
+        order_list_url = reverse("catalog:order-list")
         self.assertRedirects(
             response,
-            f"/accounts/login/?next={reverse("catalog:order-list")}"
+            f"{login_url}?next={order_list_url}"
         )
 
     def test_pagination(self):
@@ -34,7 +36,8 @@ class ViewsTest(TestCase):
             Order.objects.create(
                 customer_name=f"Customer {i}",
                 table_number=str(i),
-                price=10
+                price=10,
+                order_taker=self.employee
             )
         response = self.client.get(reverse("catalog:order-list"))
         self.assertEqual(response.status_code, 200)
