@@ -4,7 +4,7 @@ import os
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["restaurant-v16h.onrender.com", ".onrender.com", "127.0.0.1", "localhost"]
 
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
