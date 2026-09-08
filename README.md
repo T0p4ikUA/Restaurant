@@ -24,6 +24,16 @@
 * **Admin & Authentication**
   Secure system access protected by authentication and CSRF validation.
 
+## Live Demo
+
+* **URL: https://restaurant-v16h.onrender.com/**
+
+* **Test User Credentials:**
+
+**Username: user**
+
+**Password: user12345**
+
 ## Installation & Setup
 
 ### 1. Clone the Repository
